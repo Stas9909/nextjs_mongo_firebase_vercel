@@ -36,8 +36,16 @@
 
 .control {
   display: flex;
+  position: relative;
 }
 
 .control input {
   flex: 1;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  position: absolute;
+  top: 100%;
 }

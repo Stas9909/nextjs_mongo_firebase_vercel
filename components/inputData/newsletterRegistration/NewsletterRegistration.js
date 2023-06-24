@@ -7,7 +7,7 @@ function NewsletterRegistration() {
   const notificationCtx = useSelector(state => state.notification.notification);
   const dispatch = useDispatch();
 
-  function registrationHandler(values, { setSubmitting }) {
+  function registrationHandler(values, { setSubmitting, resetForm }) {
     const enteredEmail = values.email;
 
     dispatch(
@@ -41,7 +41,8 @@ function NewsletterRegistration() {
             status: 'success',
           })
         );
-        setSubmitting(false);//при получ ответа от сервера, мы разблок кнопку отправки (false - разблок/true - блокир)     
+        setSubmitting(false);//при получ ответа от сервера, мы разблок кнопку отправки (false - разблок/true - блокир) 
+        resetForm();    
       })
       .catch((error) => {
         dispatch(
@@ -73,7 +74,7 @@ function NewsletterRegistration() {
         {({ isSubmitting }) => (
           <Form>
             <div className={styles.control}>
-              <Field type='email' name='email' placeholder='Your email' aria-label='Your email' />
+              <Field type='email' name='email' placeholder='Your email' aria-label='Your email' className={styles.email}/>
               <ErrorMessage name='email' component='div' className={styles.error} />
               <button type='submit' disabled={isSubmitting}>
                 {isSubmitting ? 'Submitting' : 'Register'}
